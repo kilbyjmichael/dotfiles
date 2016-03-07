@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cp $1 tmp_cpy
+rm $1
+mv tmp_cpy $1

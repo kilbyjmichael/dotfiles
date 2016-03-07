@@ -1,0 +1,11 @@
+# This is a comment
+interval=5
+color=#00FF00
+
+[datetime]
+command=date "+%Y<span color='#586e75'>年</span>%m<span color='#586e75'>月</span>%d<span color='#586e75'>日</span> %H<span color='#586e75'>:</span>%M<span color='#586e75'>:</span>%S"
+color=#ffffff
+interval=5
+
+[time]
+command=date +%T

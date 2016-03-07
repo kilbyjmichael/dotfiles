@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+IMAGE=$(mktemp).png
+
+# Take a screenshot
+scrot $IMAGE
+
+# Pixellate it 10x
+mogrify -scale 10% -scale 1000% $IMAGE
+
+PARAM='--textcolor=ffffff00 --insidecolor=ffffff1c --ringcolor=ffeeff3e \
+        --linecolor=feefff00 --keyhlcolor=00000080 --ringvercolor=00000000 \
+        --insidevercolor=0000001c --ringwrongcolor=00000055 --insidewrongcolor=0000001c'
+
+# Lock screen displaying this image.
+i3lock -i  $IMAGE
+
+# Turn the screen off after a delay.
+sleep 20; pgrep i3lock && xset dpms force off

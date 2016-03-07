@@ -1,0 +1,5 @@
+#!/bin/bash
+
+RXB = 'cat /sys/class/net/eth0/statistics/rx_bytes'
+
+echo $RXB

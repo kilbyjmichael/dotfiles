@@ -1,0 +1,9 @@
+#!/bin/bash
+
+R1=`vnstat | awk '$7~/total/ {print $8,$9}'`
+
+I1= 'ifconfig eth0 | grep -E '(R|T)X packets' | grep -Eo '[0-9].*' | awk '{print $1}''
+
+
+
+echo $I1

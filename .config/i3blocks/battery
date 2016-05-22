@@ -21,7 +21,8 @@ my $status;
 my $percent;
 my $full_text;
 my $short_text;
-my $bat_number = $ENV{BLOCK_INSTANCE} || 1;
+my $stuff;
+my $bat_number = $ENV{BLOCK_INSTANCE} || 0;
 
 # read the first line of the "acpi" command output
 open (ACPI, "acpi -b | grep 'Battery $bat_number' |") or die;
@@ -37,10 +38,11 @@ $status = $1;
 $percent = $2;
 $full_text = "$percent%";
 
+
 if ($status eq 'Discharging') {
-	$full_text .= 'D';
+	$full_text .= ' ⚡';
 } elsif ($status eq 'Charging') {
-	$full_text .= ' C';
+	$full_text .= ' 🔌';
 }
 
 $short_text = $full_text;
@@ -62,11 +64,13 @@ if ($status eq 'Discharging') {
 		print "#FFAE00\n";
 	} elsif ($percent < 60) {
 		print "#FFF600\n";
-	} elsif ($percent < 85) {
+	} elsif ($percent < 95) {
 		print "#A8FF00\n";
-	}
+	} elsif ($percent > 95) {
+	    print"#FFD700\n";
+    }
 
-	if ($percent < 5) {
+	if ($percent < 10) {
 		exit(33);
 	}
 }

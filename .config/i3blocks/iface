@@ -49,13 +49,20 @@ case $1 in
 esac
 
 # if no interface is found, use the first device with a global scope
+
 IPADDR=$(ip addr show $IF | perl -n -e "/$AF ([^\/]+).* scope global/ && print \$1 and exit")
+
+WLAN=$(nmcli d | awk 'NR==2{print $4,$5}')
+
+WIFI=$(nmcli d | awk 'NR==2{print $2}')
 
 case $BLOCK_BUTTON in
   3) echo -n "$IPADDR" | xclip -q -se c ;;
 esac
 
 #------------------------------------------------------------------------
-
-echo "$IPADDR" # full text
-echo "$IPADDR" # short text
+if [[$WIFI != 'wifi']]; then
+    echo $IPADDR'<sup> on </sup><span foreground="#FF7000">ETH</span>'
+else
+    echo $IPADDR'<sup> on </sup><span foreground="#FF7000">'$WLAN'</span>'
+fi

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+NUM=$(xset -q | grep Caps | sed -E 's/.*Num Lock:[^a-z]+([a-z]+).*/ \1/')
+
+echo  🔣 #full text
+echo  🔣 #short text
+
+if [ $NUM = 'on' ]; then
+    echo \#FFD700 # color
+else
+    echo \#586e75 # color
+fi
